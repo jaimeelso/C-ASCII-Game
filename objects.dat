@@ -1,0 +1,20 @@
+#o:1|telefono|1|1|0|1|0|0|-1|0|Este es tu telefono|El teléfono te permite leer mensajes, pero no pudes enviarlos ya que no tienes saldo|
+#o:2|apuntes|1|0|0|1|0|0|-1|0|Estos son tus apuntes de electro|son apuntes de electro que estaban en tu escritorio|
+#o:3|papelera|1|0|0|1|0|0|-1|0|Esta es la papelera|La papelera dentro tiene apuntes de calculo|
+#o:4|jeringuilla|2|0|0|1|0|0|10|0|Estea es una jeringuilla|La jeringuilla probablemente sea peligrosa ya que podria estar infectada|
+#o:5|flyer|2|1|0|0|0|0|2|0|Este es un Flyer de Rococo|Con este flyer puedes entrar en la discoteca|
+#o:6|copa|3|1|0|0|0|0|-1|0|Esto es una copa|Puedes comprarlas mientras tengas dinero ,pero no te pases|
+#o:7|dni|4|0|0|1|0|0|-1|0|Esto es un DNI|El DNI es de una chica portuguesa|
+#o:8|formula_cocacola|5|0|0|1|0|0|-1|0|Esta es la formula de la cocacola|Formula: agua, azucar, colorante y mas azucar|
+#o:9|lista_implicados|5|0|0|1|0|0|11|0|Implicados en el asesinato de Kennedi|Implicados: Donald Trump, los illuminaty, la CIA y Pil|
+#o:10|pastis|6|1|0|0|0|0|6|0|Esto son unas pastis|Deberias darselas al DJ para hacer un trato|
+#o:11|vomito|6|0|0|1|0|0|-1|0|Esto es un charco de vomito|Parece que alguien ha bebido demasiado, y que ha comido gambas...|
+#o:12|bocadillo|7|1|0|1|0|0|-1|0|Esto es un bocadillo|Comerselo te asienta el estomago (-1 copa consumida)|
+#o:13|linterna|8|1|0|1|1|0|-1|0|Esto es una linterna|Con la linterna podras ver en salas oscuras|
+#o:14|urinario|8|0|0|1|0|0|-1|0|Esto es un urinario|Pff... Que ganas de usarlo|
+#o:15|cartera|9|1|0|1|0|0|9|0|Esto es la cartera de Oskar.KS|Es la cartera de Oskar.KS eso significa que esta por aqui cerca|
+#o:16|crucifijo|9|1|0|1|0|0|-1|0|Esto es un crucifijo|Nunca sabes cuando puedes necesitar un poco de ayuda del de arriba|
+#o:17|burndanga|10|1|0|1|0|0|12|0|Esta es una copa con burundanga|Parece que es la copa de Oskar.KS|
+#o:18|antidoto|10|1|0|1|0|0|-1|0|Esto es un antidoto para la burundanga|Si se lo damos a Oskar.KS probablemente mejore|
+#o:19|dinero|-1|1|0|1|0|0|-1|100|Esto es dinero|Sirve para comprar cosas pero cuida de no gastarlo todo|
+#o:20|abrigo|-1|1|0|0|0|0|4|0|Esto es un abrigo|debes dejarlo en el ropero para avanzar mas en la discoteca|

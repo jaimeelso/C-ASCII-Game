@@ -1,0 +1,22 @@
+#s:1|telefono|1|0|0|1|0|0|-1|Este es tu telefono|El teléfono te permite leer mensajes, pero no pudes enviarlos ya que no tienes saldo|
+#s:2|apuntes|1|0|0|1|0|0|-1|Estos son tus apuntes de electro|son apuntes de electro que estaban en tu escritorio|
+#s:3|papelera|1|0|0|1|0|0|-1|Esta es la papelera|La papelera dentro tiene apuntes de calculo|
+#s:4|jeringuilla|2|0|0|1|0|0|10|Estea es una jeringuilla|La jeringuilla probablemente sea peligrosa ya que podria estar infectada|
+#s:5|Flyer|2|1|0|1|0|0|2|Este es un Flyer de Rococo|Con este flyer puedes entrar en la discoteca|
+#s:6|copa|3|1|0|1|0|0|-1|Esto es una copa|Puedes comprarlas mientras tengas dinero ,pero no te pases|
+#s:7|DNI|4|1|0|1|0|0|-1|Esto es un DNI|El DNI es de una chica portuguesa|
+#s:8|fajo|5|1|0|1|0|0|-1|Esto es un fajo de dinero|cada fajo equivale a 100$|
+#s:9|formula cocacola|5|1|0|1|0|0|-1|Esta es la formula de la cocacola|Formula: agua ,azucar ,colorante y mas azucar|
+#s:10|Lista implicados|5|0|0|1|0|0|11|Implicados en el asesinato de Kennedi|Implicados: Donald Trump, los illuminaty, la CIA y Pil|
+#s:11|pastis|6|1|0|1|0|0|6|Esto son unas pastis|Deberias darselas al DJ para hacer un trato|
+#s:12|un euro|6|1|0|1|0|0|-1|Esto es un euro|añade un euro a tu inventario|
+#s:13|vomito|6|0|0|1|0|0|-1|Esto es un charco de vomito|Parece que alguien ha bebido demasiado, y que ha comido gambas...|
+#s:14|bocadillo|7|1|0|1|0|0|-1|Esto es un bocadillo|Comerselo te asienta el estomago (-1 copa consumida)|
+#s:15|linterna|8|1|0|1|1|0|-1|Esto es una linterna|Con la linterna podras ver en salas oscuras|
+#s:16|urinario|8|0|0|1|0|0|-1|Esto es un urinario|Pff... Que ganas de usarlo|
+#s:17|cartera|9|1|0|1|0|0|9|Esto es la cartera de Oskar.KS|Es la cartera de Oskar.KS eso significa que esta por aqui cerca|
+#s:18|crucifijo|9|1|0|1|0|0|-1|Esto es un crucifijo|Nunca sabes cuando puedes necesitar un poco de ayuda del de arriba|
+#s:19|Copa burndanga|10|1|0|1|0|0|12|Esta es una copa con burundanga|Parece que es la copa de Oskar.KS|
+#s:20|antidoto|10|1|0|1|0|0|-1|Esto es un antidoto para la burundanga|Si se lo damos a Oskar.KS probablemente mejore|
+#s:21|dinero|-1|1|0|1|0|0|-1|Esto es dinero|Sirve para comprar cosas pero cuida de no gastarlo todo|
+#s:22|abrigo|-1|1|0|1|0|0|4|Esto es un abrigo|debes dejarlo en el ropero para avanzar mas en la discoteca|
