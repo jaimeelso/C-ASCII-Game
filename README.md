@@ -1,5 +1,7 @@
 # C ASCII Game
 
+![License](https://img.shields.io/github/license/lotgar/C-ASCII-Game?style=for-the-badge)
+
 <p align="center">
     <img src="https://raw.githubusercontent.com/lotgar/C-ASCII-Game/master/logo.png">
 </p>
