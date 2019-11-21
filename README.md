@@ -46,13 +46,13 @@ hablar / h + nombre personaje           Hablar
 beber / b + copa                        Beber Copa
 ```
 
-## License
-
-C ASCII GAME is licensed under the [MIT License](https://github.com/lotgar/C-ASCII-Game/blob/master/LICENSE)
-
 ## How to run the tests
 
 _
+
+## License
+
+C ASCII GAME is licensed under the [MIT License](https://github.com/lotgar/C-ASCII-Game/blob/master/LICENSE)
 
 ## Authors
 
