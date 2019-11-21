@@ -20,3 +20,15 @@ make run
 You have to have the **gcc compiler** installed on your computer to compile the code.
 
 ## How it works
+
+_
+
+## Authors
+
+Jaime Elso de Blas - https://jaimeelso.com/
+
+Sergio García Bordonado
+
+Alfredo de Frutos Estebaranz
+
+Sung Pil Choi
