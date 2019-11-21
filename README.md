@@ -50,6 +50,10 @@ beber / b + copa                        Beber Copa
 
 C ASCII GAME is licensed under the [MIT License](https://github.com/lotgar/C-ASCII-Game/blob/master/LICENSE)
 
+## How to run the tests
+
+_
+
 ## Authors
 
 - [Jaime Elso de Blas](https://jaimeelso.com/) - **Developer**
