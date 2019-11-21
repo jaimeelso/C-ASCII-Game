@@ -34,17 +34,21 @@ avanzar / a                             Ir
     este / e                                al este
     arriba / ar                             arriba
     abajo / aba                             abajo
-(coger / c) + (nombre del objeto)       Coger objeto
+coger / c + (nombre del objeto)         Coger objeto
 dejar / d + (nombre del objeto)         Dejar objeto
 inspeccionar / i +                      Inspeccionar
-    Espacio / e                             espacio
-    Nombre objeto                           objeto
+    espacio / e                             espacio
+    (nombre objeto)                         objeto
 turnon + nombre objeto                  Encender objeto
 turnoff + nombre objeto                 Apagar objeto
 guardar / g + nombre partida            Guardar
 hablar / h + nombre personaje           Hablar
 beber / b + copa                        Beber Copa
 ```
+
+## License
+
+C ASCII GAME is licensed under the [MIT License](https://github.com/lotgar/C-ASCII-Game/blob/master/LICENSE)
 
 ## Authors
 
