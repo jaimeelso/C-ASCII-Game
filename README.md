@@ -1,5 +1,9 @@
 # C ASCII Game
 
+<p align="center">
+    <img src="https://raw.githubusercontent.com/lotgar/C-ASCII-Game/master/logo.png">
+</p>
+
 "Minas de Rococo" is a **graphical adventure** made in **C** with **ASCII graphics** executed in the terminal. In this adventure you will live the experience of rescue your best friend from a drunkenness in a disgusting nightclub. To achieve this you will have to advance through the different levels talking with different people and getting certain objects. 
 
 ## Install
