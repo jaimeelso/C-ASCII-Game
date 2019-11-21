@@ -1,9 +1,9 @@
 # C ASCII Game
 
-![Language](https://img.shields.io/badge/Language-C-red?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-4.0-blue?style=for-the-badge) ![License](https://img.shields.io/github/license/lotgar/C-ASCII-Game?style=for-the-badge)
+![Language](https://img.shields.io/badge/Language-C-red?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-4.0-blue?style=for-the-badge) ![License](https://img.shields.io/github/license/jaimeelso/C-ASCII-Game?style=for-the-badge)
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/lotgar/C-ASCII-Game/master/logo.png">
+    <img src="https://raw.githubusercontent.com/jaimeelso/C-ASCII-Game/master/logo.png">
 </p>
 
 "Minas de Rococo" is a **graphical adventure** made in **C** with **ASCII graphics** executed in the terminal. In this adventure you will live the experience of rescue your best friend from a drunkenness in a disgusting nightclub. To achieve this you will have to advance through the different levels talking with different people and getting certain objects. 
