@@ -13,7 +13,7 @@
 Download the tablet from this repository or clone it by terminal using the command:
 
 ```shell
-git clone https://github.com/lotgar/C-ASCII-Game.git
+git clone https://github.com/jaimeelso/C-ASCII-Game.git
 ```
 
 With the terminal, go to the root folder and execute this two comands:
@@ -58,7 +58,7 @@ _
 
 ## License
 
-C ASCII GAME is licensed under the [MIT License](https://github.com/lotgar/C-ASCII-Game/blob/master/LICENSE)
+C ASCII GAME is licensed under the [MIT License](https://github.com/jaimeelso/C-ASCII-Game/blob/master/LICENSE)
 
 ## Authors
 
