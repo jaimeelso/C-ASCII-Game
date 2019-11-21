@@ -1,6 +1,6 @@
 # C ASCII Game
 
-![Version](https://img.shields.io/github/manifest-json/v/lotgar/C-ASCII-Game?style=for-the-badge) ![License](https://img.shields.io/github/license/lotgar/C-ASCII-Game?style=for-the-badge)
+![Language](https://img.shields.io/badge/Language-C-red?style=for-the-badge) ![Version](https://img.shields.io/github/manifest-json/v/lotgar/C-ASCII-Game?style=for-the-badge) ![License](https://img.shields.io/github/license/lotgar/C-ASCII-Game?style=for-the-badge)
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/lotgar/C-ASCII-Game/master/logo.png">
