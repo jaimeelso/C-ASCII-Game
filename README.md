@@ -25,24 +25,26 @@ _
 
 ### Commands
 
-1. quit / q Salir
-2. avanzar / a Ir
-    - norte / n:                          al norte
-    - sur / s:                            al sur
-    - oeste / o:                          al oeste
-    - este / e: al este
-    - arriba / ar : arriba
-    - abajo / aba: abajo
-3. (coger / c) + (nombre del objeto): Coger objeto
-4. dejar / d + (nombre del objeto):Dejar objeto
-5. inspeccionar / i +: Inspeccionar
-6. Espacio / e Inspeccionar espacio
-7. Nombre objeto Inspeccionar objeto
-8. turnon + nombre objeto Encender objeto
-9. turnoff + nombre objeto Apagar objeto
-10. guardar / g + nombre partida: Guardar
-11. hablar / h + nombre personaje: Hablar
-12. beber / b + copa: Beber Copa
+```shell
+quit / q                                Salir
+avanzar / a                             Ir
+    norte / n                               al norte
+    sur / s                                 al sur
+    oeste / o                               al oeste
+    este / e                                al este
+    arriba / ar                             arriba
+    abajo / aba                             abajo
+(coger / c) + (nombre del objeto)       Coger objeto
+dejar / d + (nombre del objeto)         Dejar objeto
+inspeccionar / i +                      Inspeccionar
+    Espacio / e                             espacio
+    Nombre objeto                           objeto
+turnon + nombre objeto                  Encender objeto
+turnoff + nombre objeto                 Apagar objeto
+guardar / g + nombre partida            Guardar
+hablar / h + nombre personaje           Hablar
+beber / b + copa                        Beber Copa
+```
 
 ## Authors
 
