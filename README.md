@@ -46,7 +46,7 @@ _
 
 ## Authors
 
-- [Jaime Elso de Blas](https://jaimeelso.com/)
-- Sergio García Bordonado
-- Alfredo de Frutos Estebaranz
-- Sung Pil Choi
+- [Jaime Elso de Blas](https://jaimeelso.com/) - **Developer**
+- Sergio García Bordonado - **Game Designer**
+- Alfredo de Frutos Estebaranz - **Developer**
+- Sung Pil Choi - **Tester**
