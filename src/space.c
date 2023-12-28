@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "space.h"
+#include "../include/space.h"
 
 /**
  * @brief struct _Space

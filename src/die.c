@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "die.h"
+#include "../include/die.h"
  
 /**
  * @brief struct _Die

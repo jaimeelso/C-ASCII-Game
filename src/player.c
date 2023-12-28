@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "player.h"
+#include "../include/player.h"
 
 /**
  * @brief struct _Player

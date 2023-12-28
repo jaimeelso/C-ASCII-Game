@@ -13,7 +13,7 @@
 #include <stdlib.h> 
 #include <string.h> 
 
-#include "link_test.h"
+#include "../include/link_test.h"
 
 
 /** 

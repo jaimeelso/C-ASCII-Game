@@ -11,10 +11,11 @@
 
 #include <stdio.h> 
 #include <stdlib.h> 
-#include <string.h> 
-#include "object.h"
-#include "object_test.h"
-#include "test.h"
+#include <string.h>
+
+#include "../include/object.h"
+#include "../include/object_test.h"
+#include "../include/test.h"
 
 /** 
  * @brief Funcion principal de pruebas para el modulo object. 

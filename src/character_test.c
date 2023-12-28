@@ -13,7 +13,7 @@
 #include <stdlib.h> 
 #include <string.h> 
 
-#include "character_test.h"
+#include "../include/character_test.h"
 
 /** 
  * @brief Funcion principal de pruebas para el modulo Character. 

@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "inventory.h"
+#include "../include/inventory.h"
 
 /**
  * @brief struct _Inventory

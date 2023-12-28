@@ -13,7 +13,7 @@
 #include <stdlib.h> 
 #include <string.h> 
 
-#include "die_test.h"
+#include "../include/die_test.h"
 
 
 /** 

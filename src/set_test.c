@@ -13,7 +13,7 @@
 #include <stdlib.h> 
 #include <string.h> 
 
-#include "set_test.h"
+#include "../include/set_test.h"
 
 
 /** 

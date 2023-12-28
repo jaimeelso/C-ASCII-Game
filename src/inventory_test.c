@@ -13,7 +13,7 @@
 #include <stdlib.h> 
 #include <string.h> 
 
-#include "inventory_test.h"
+#include "../include/inventory_test.h"
 
 /** 
  * @brief Funcion principal de pruebas para el modulo Inventory. 

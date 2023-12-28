@@ -33,9 +33,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "game.h"
-#include "game_managment.h"
-#include "graphic_engine.h"
+#include "../include/game.h"
+#include "../include/game_managment.h"
+#include "../include/graphic_engine.h"
 
 #ifdef __WINDOWS_BUILD__
 #define CLEAR "cls" 	/*!< Clear de la consola */

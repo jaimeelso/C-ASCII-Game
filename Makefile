@@ -3,7 +3,16 @@
 # Alfredo de Frutos Estebaranz
 # SungPil Choi
 
+# .c files
+SRC_DIR = src
+# .h files
+INC_DIR = include
+# .dat files
+DATA_DIR = data
+
+# compiler
 CC = gcc
+# compiler flags
 CFLAGS = -c -Wall -ansi -pedantic -g
 
 all: Minas_de_Rococo set_test die_test inventory_test player_test space_test link_test character_test object_test dialogue_test
@@ -38,70 +47,70 @@ object_test: object_test.o object.o
 character_test: character_test.o character.o
 	$(CC) $^ -o $@
 
-game.o: game.c game.h game_managment.h 
+game.o: $(SRC_DIR)/game.c $(INC_DIR)/game.h $(INC_DIR)/game_managment.h 
 	$(CC) $(CFLAGS) $< -o game.o
 
-game_loop.o: game_loop.c game.h 
+game_loop.o: $(SRC_DIR)/game_loop.c $(INC_DIR)/game.h 
 	$(CC) $(CFLAGS) $< -o game_loop.o
 
-command.o: command.c command.h
+command.o: $(SRC_DIR)/command.c $(INC_DIR)/command.h
 	$(CC) $(CFLAGS) $< -o command.o
 
-space.o: space.c space.h types.h link.h
+space.o: $(SRC_DIR)/space.c $(INC_DIR)/space.h $(INC_DIR)/types.h $(INC_DIR)/link.h
 	$(CC) $(CFLAGS) $< -o space.o
 
-game_managment.o: game_managment.c game_managment.h game.h
+game_managment.o: $(SRC_DIR)/game_managment.c $(INC_DIR)/game_managment.h $(INC_DIR)/game.h
 	$(CC) $(CFLAGS) $< -o game_managment.o
 
-object.o: object.c object.h types.h
+object.o: $(SRC_DIR)/object.c $(INC_DIR)/object.h $(INC_DIR)/types.h
 	$(CC) $(CFLAGS) $< -o object.o
 
-player.o: player.c player.h types.h
+player.o: $(SRC_DIR)/player.c $(INC_DIR)/player.h $(INC_DIR)/types.h
 	$(CC) $(CFLAGS) $< -o player.o
 
-set.o: set.c set.h types.h
+set.o: $(SRC_DIR)/set.c $(INC_DIR)/set.h $(INC_DIR)/types.h
 	$(CC) $(CFLAGS) $< -o set.o
 
-die.o: die.c die.h types.h
+die.o: $(SRC_DIR)/die.c $(INC_DIR)/die.h $(INC_DIR)/types.h
 	$(CC) $(CFLAGS) $< -o die.o
 
-link.o: link.c link.h 
+link.o: $(SRC_DIR)/link.c $(INC_DIR)/link.h 
 	$(CC) $(CFLAGS) $< -o link.o
 
-inventory.o: inventory.c inventory.h set.h
+inventory.o: $(SRC_DIR)/inventory.c $(INC_DIR)/inventory.h $(INC_DIR)/set.h
 	$(CC) $(CFLAGS) $< -o inventory.o
 
-character.o: character.c character.h
+character.o: $(SRC_DIR)/character.c $(INC_DIR)/character.h
 	$(CC) $(CFLAGS) $< -o character.o
 
-graphic_engine.o: graphic_engine.c graphic_engine.h
+graphic_engine.o: $(SRC_DIR)/graphic_engine.c $(INC_DIR)/graphic_engine.h
 	$(CC) $(CFLAGS) $< -o graphic_engine.o
 
-dialogue.o: dialogue.c dialogue.h
+dialogue.o: $(SRC_DIR)/dialogue.c $(INC_DIR)/dialogue.h
 	$(CC) $(CFLAGS) $< -o dialogue.o
 
-set_test.o: set_test.c set.h set_test.h
+set_test.o: $(SRC_DIR)/set_test.c $(INC_DIR)/set.h $(INC_DIR)/set_test.h
 	$(CC) $(CFLAGS) $< -o set_test.o
 
-die_test.o: die_test.c die_test.h die.h 
+die_test.o: $(SRC_DIR)/die_test.c $(INC_DIR)/die_test.h $(INC_DIR)/die.h 
 	$(CC) $(CFLAGS) $< -o die_test.o
 
-character_test.o: character_test.c character_test.h character.h
+character_test.o: $(SRC_DIR)/character_test.c $(INC_DIR)/character_test.h $(INC_DIR)/character.h
 	$(CC) $(CFLAGS) $< -o character_test.o
 
-link_test.o: link_test.c link_test.h link.h
+link_test.o: $(SRC_DIR)/link_test.c $(INC_DIR)/link_test.h $(INC_DIR)/link.h
 	$(CC) $(CFLAGS) $< -o link_test.o
 
-dialogue_test.o: dialogue_test.c dialogue_test.h dialogue.h
+dialogue_test.o: $(SRC_DIR)/dialogue_test.c $(INC_DIR)/dialogue_test.h $(INC_DIR)/dialogue.h
 	$(CC) $(CFLAGS) $< -o dialogue_test.o
 
-inventory_test.o: inventory_test.c inventory_test.h inventory.h set.h 
+inventory_test.o: $(SRC_DIR)/inventory_test.c $(INC_DIR)/inventory_test.h $(INC_DIR)/inventory.h $(INC_DIR)/set.h 
 	$(CC) $(CFLAGS) $< -o inventory_test.o
 
-player_test.o: player_test.c player_test.h player.h
+player_test.o: $(SRC_DIR)/player_test.c $(INC_DIR)/player_test.h $(INC_DIR)/player.h
 	$(CC) $(CFLAGS) $< -o player_test.o
 
-space_test.o: space_test.c space_test.h space.h
+space_test.o: $(SRC_DIR)/space_test.c $(INC_DIR)/space_test.h $(INC_DIR)/space.h
 	$(CC) $(CFLAGS) $< -o space_test.o
 
 clean: 
@@ -111,13 +120,13 @@ dist:
 	tar -cf JaimeElso-SergioGarcia-AlfredoDeFrutos-Pil.tar *.h *.c Makefile spaces.dat objects.dat links.dat
 
 run:
-	./Minas_de_Rococo spaces.dat objects.dat links.dat characters.dat players.dat
+	./Minas_de_Rococo $(DATA_DIR)/spaces.dat $(DATA_DIR)/objects.dat $(DATA_DIR)/links.dat $(DATA_DIR)/characters.dat $(DATA_DIR)/players.dat
 
 log:
-	./Minas_de_Rococo spaces.dat objects.dat links.dat characters.dat players.dat -l registro.log
+	./Minas_de_Rococo $(DATA_DIR)/spaces.dat $(DATA_DIR)/objects.dat $(DATA_DIR)/links.dat $(DATA_DIR)/characters.dat $(DATA_DIR)/players.dat -l registro.log
 
 nv: 
-	./Minas_de_Rococo spaces.dat objects.dat links.dat characters.dat players.dat -l registro.log -nv < comandos.ent
+	./Minas_de_Rococo $(DATA_DIR)/spaces.dat $(DATA_DIR)/objects.dat $(DATA_DIR)/links.dat $(DATA_DIR)/characters.dat $(DATA_DIR)/players.dat -l registro.log -nv < comandos.ent
 
 doxyfile:
 	doxygen -g

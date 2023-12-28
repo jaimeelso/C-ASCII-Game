@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "object.h"
-#include "types.h"
+#include "../include/object.h"
+#include "../include/types.h"
 
 /**
  * @brief struct _Object

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "dialogue.h"
+#include "../include/dialogue.h"
 
 /**
  * @brief struct _Character

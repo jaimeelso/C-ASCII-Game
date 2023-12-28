@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "character.h"
+#include "../include/character.h"
  
 /**
  * @brief struct _Character

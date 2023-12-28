@@ -19,8 +19,8 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "game.h"
-#include "game_managment.h"
+#include "../include/game.h"
+#include "../include/game_managment.h"
 
 STATUS game_managment_load_spaces(Game* game, char* filename) {
   FILE* file = NULL;  /*Puntero para el archivo de texto*/

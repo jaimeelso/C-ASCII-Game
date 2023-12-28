@@ -13,7 +13,7 @@
 #include <stdlib.h> 
 #include <string.h> 
 
-#include "dialogue_test.h"
+#include "../include/dialogue_test.h"
 
 /** 
  * @brief Funcion principal de pruebas para el modulo Dialogue. 

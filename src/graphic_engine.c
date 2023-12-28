@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "graphic_engine.h"
+#include "../include/graphic_engine.h"
 
 #ifdef __WINDOWS_BUILD__
 #define CLEAR "cls" 	/*!< Clear de la consola */

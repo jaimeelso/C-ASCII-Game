@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "link.h"
+#include "../include/link.h"
 
 /**
  * @brief struct _Link
