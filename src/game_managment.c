@@ -23,154 +23,99 @@
 #include "../include/game_managment.h"
 
 STATUS game_managment_load_spaces(Game* game, char* filename) {
-  FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	FILE* file = NULL;  /* Puntero para el archivo de texto */
 
-  char line[WORD_SIZE] = "";  /*Cadena de caracteres*/
-  char name[WORD_SIZE] = "";  /*Cadena de caracteres*/
-  char paint1[DESC_SIZE] = "";  /*Primera linea de arte ASCII*/
-  char paint2[DESC_SIZE] = "";  /*Segunda linea de arte ASCII*/
-  char paint3[DESC_SIZE] = "";  /*Tercera linea de arte ASCII*/
-  char paint4[DESC_SIZE] = "";  /*Cuarta linea de arte ASCII*/
-  char paint5[DESC_SIZE] = "";  /*Quinta linea de arte ASCII*/
-  char paint6[DESC_SIZE] = "";  /*Sexta linea de arte ASCII*/
-  char paint7[DESC_SIZE] = "";  /*Septima linea de arte ASCII*/
-  char paint8[DESC_SIZE] = "";  /*Octava linea de arte ASCII*/
-  char paint9[DESC_SIZE] = "";  /*Novena linea de arte ASCII*/  
-  char paint10[DESC_SIZE] = "";  /*Decima linea de arte ASCII*/  
-  char paint11[DESC_SIZE] = "";  /*Decimoprimera linea de arte ASCII*/   
-  char description[DESCRIPTION_SIZE] = ""; /*Cadena de caracteres*/
-  char large_description[LARGE_DESCRIPTION_SIZE] = ""; /*Cadena de caracteres*/
-  BOOL illuminated = TRUE;
-  char* toks = NULL;  /*Puntero a char*/
+	char line[WORD_SIZE] = "";  /* Cadena de caracteres */
+	char name[WORD_SIZE] = "";  /* Cadena de caracteres */
+	char paints[PRINT_LINES][DESC_SIZE]; /* Array de strings que contienen lineas del arte de ASCII */
+	int i; /* Variable para el bucle for */
+	char description[DESCRIPTION_SIZE] = ""; /* Cadena de caracteres */
+	char large_description[LARGE_DESCRIPTION_SIZE] = ""; /* Cadena de caracteres */
+	BOOL illuminated = TRUE;
+	char* toks = NULL;  /* Puntero a char */
 
-  Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID, up = NO_ID, down = NO_ID;  /*Almacenamiento de diferentes ID*/
+	Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID, up = NO_ID, down = NO_ID;  /* Almacenamiento de diferentes ID */
 
-  Space* space = NULL;  /*Puntero a la estructura Space*/
+	Space* space = NULL;  /* Puntero a la estructura Space */
 
-  STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
+	STATUS status = OK; /* variable a devolver por la función para ver si a salido todo bien */
   
-  if (!filename) {
-    return ERROR;
-  }
+	if (!filename) {
+		return ERROR;
+	}
   
-  file = fopen(filename, "r");
-  if (file == NULL) {
-    return ERROR;
-  }
+	file = fopen(filename, "r");
+	if (file == NULL) {
+		return ERROR;
+	}
   
-  while (fgets(line, WORD_SIZE, file)) {
-    if (strncmp("#s:", line, 3) == 0) {
-      toks = strtok(line + 3, "ç");
-      id = atol(toks);
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(name, toks);
-      }
-      toks = strtok(NULL, "ç");
-      north = atol(toks);
-      toks = strtok(NULL, "ç");
-      east = atol(toks);
-      toks = strtok(NULL, "ç");
-      south = atol(toks);
-      toks = strtok(NULL, "ç");
-      west = atol(toks);
-      toks = strtok(NULL, "ç");
-      up = atol(toks);
-      toks = strtok(NULL, "ç");
-      down = atol(toks);
-      toks = strtok(NULL, "ç");
-      illuminated = atoi(toks);
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint1, toks);
-      }  
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint2, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint3, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint4, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint5, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint6, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint7, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint8, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint9, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint10, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(paint11, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(description, toks);
-      }
-      toks = strtok(NULL, "ç");
-      if(toks){
-        strcpy(large_description, toks);
-      }
+	while (fgets(line, WORD_SIZE, file)) {
+		if (strncmp("#s:", line, 3) == 0) {
+			toks = strtok(line + 3, SPACES_DELIMITER);
+			id = atol(toks);
+			toks = strtok(NULL, SPACES_DELIMITER);
+			if(toks){
+				strcpy(name, toks);
+			}
+			toks = strtok(NULL, SPACES_DELIMITER);
+			north = atol(toks);
+			toks = strtok(NULL, SPACES_DELIMITER);
+			east = atol(toks);
+			toks = strtok(NULL, SPACES_DELIMITER);
+			south = atol(toks);
+			toks = strtok(NULL, SPACES_DELIMITER);
+			west = atol(toks);
+			toks = strtok(NULL, SPACES_DELIMITER);
+			up = atol(toks);
+			toks = strtok(NULL, SPACES_DELIMITER);
+			down = atol(toks);
+			toks = strtok(NULL, SPACES_DELIMITER);
+			illuminated = atoi(toks);
+			for (i = 0; i < PRINT_LINES; i++) {
+				toks = strtok(NULL, SPACES_DELIMITER);
+				if(toks){
+					strcpy(paints[i], toks);
+				}
+			}
+			toks = strtok(NULL, SPACES_DELIMITER);
+			if(toks){
+				strcpy(description, toks);
+			}
+			toks = strtok(NULL, SPACES_DELIMITER);
+			if(toks){
+				strcpy(large_description, toks);
+			}
 #ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s|%s|%s|%s\n", id, name, north, east, south, west, up, down, illuminated, paint1, paint2, paint3, description, large_description);
+			printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s|%s|%s|%s\n", id, name, north, east, south, west, up, down, illuminated, paints[0], paints[1], paints[2], description, large_description);
 #endif
-      space = space_create(id);
-      if (space != NULL) {
-      	space_set_name(space, name);
-      	space_set_link_north(space, north);
-      	space_set_link_east(space, east);
-      	space_set_link_south(space, south);
-      	space_set_link_west(space, west);
-        space_set_link_up(space, up);
-        space_set_link_down(space, down);
-        space_set_illuminated(space, illuminated);
-        space_set_gdesc(space, 0, paint1);
-        space_set_gdesc(space, 1, paint2);
-        space_set_gdesc(space, 2, paint3);
-        space_set_gdesc(space, 3, paint4);
-        space_set_gdesc(space, 4, paint5);
-        space_set_gdesc(space, 5, paint6);
-        space_set_gdesc(space, 6, paint7);
-        space_set_gdesc(space, 7, paint8);
-        space_set_gdesc(space, 8, paint9);
-        space_set_gdesc(space, 9, paint10);
-        space_set_gdesc(space, 10, paint11);
-        space_set_description(space, description);
-        space_set_large_description(space, large_description);
-        
-      	game_add_space(game, space);
-      }
-    }
-  }
+			space = space_create(id);
+			if (space != NULL) {
+				space_set_name(space, name);
+				space_set_link_north(space, north);
+				space_set_link_east(space, east);
+				space_set_link_south(space, south);
+				space_set_link_west(space, west);
+				space_set_link_up(space, up);
+				space_set_link_down(space, down);
+				space_set_illuminated(space, illuminated);
+				for (i = 0; i < PRINT_LINES; i++) {
+					space_set_gdesc(space, i, paints[i]);
+				}
+				space_set_description(space, description);
+				space_set_large_description(space, large_description);
+			
+				game_add_space(game, space);
+			}
+		}
+	}
   
-  if (ferror(file)) {
-    status = ERROR;
-  }
-  
-  fclose(file);
-  
-  return status;
+	if (ferror(file)) {
+		status = ERROR;
+	}
+	
+	fclose(file);
+	
+	return status;
 }
 
 STATUS game_managment_load_objects(Game* game, char* filename){
@@ -202,33 +147,33 @@ STATUS game_managment_load_objects(Game* game, char* filename){
   
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#o:", line, 3) == 0) {
-      toks = strtok(line + 3, "|");
+      toks = strtok(line + 3, DELIMITER);
       id = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
         strcpy(name, toks);
       }
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       location = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       movable = atoi(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       move = atoi(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       visible = atoi(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       illuminated = atoi(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       on = atoi(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       link = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       n_objects = atoi(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
        strcpy(description, toks);
       }
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
         strcpy(alt_description, toks);
       }
@@ -290,19 +235,19 @@ STATUS game_managment_load_links(Game* game, char* filename) {
   
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#l:", line, 3) == 0) {
-      toks = strtok(line + 3, "|");
+      toks = strtok(line + 3, DELIMITER);
       id = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
         strcpy(name, toks);
       }
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       linkA = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       linkB = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       access = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
         strcpy(clue, toks);
       }
@@ -360,19 +305,19 @@ STATUS game_managment_load_characters(Game* game, char* filename) {
   
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#c:", line, 3) == 0) {
-      toks = strtok(line + 3, "|");
+      toks = strtok(line + 3, DELIMITER);
       id = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
         strcpy(name, toks);
       }
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       location = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       object = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       talk = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
       strcpy(description, toks);
     }
@@ -428,25 +373,25 @@ STATUS game_managment_load_players(Game* game, char* filename) {
   
   while (fgets(line, WORD_SIZE, file)) {
     if (strncmp("#p:", line, 3) == 0) {
-      toks = strtok(line + 3, "|");
+      toks = strtok(line + 3, DELIMITER);
       id = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       if(toks){
        strcpy(name, toks);
       }
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       location = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       object1 = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       object2 = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       object3 = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       object4 = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       object5 = atol(toks);
-      toks = strtok(NULL, "|");
+      toks = strtok(NULL, DELIMITER);
       object6 = atol(toks);
 #ifdef DEBUG 
       printf("Leido: %ld|%s|%ld|%ld|%d|%ld|%ld|%ld|%ld\n", id, name, location, object1, object2, object3, object4, object5, object6);

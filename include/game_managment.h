@@ -19,6 +19,10 @@
 #include "types.h"
 #include "game.h"
 
+#define PRINT_LINES 11	/*Núero de lineas que forman un espacio*/
+#define SPACES_DELIMITER "ç"
+#define DELIMITER "|"
+
 /*Cabeceras de funciones*/
 
 /**

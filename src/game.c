@@ -839,7 +839,7 @@ int game_get_drunkenness(Game* game){
 
 STATUS game_update(Game* game, MyCmd* mycmd) {
   T_Command cmd, arg;  /*Almacenamos el comando*/
-  STATUS status;
+  STATUS status = OK;
   cmd = command_get_cmd(mycmd);
   arg = command_get_arg(mycmd);
 

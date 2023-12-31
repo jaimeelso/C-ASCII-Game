@@ -113,8 +113,14 @@ player_test.o: $(SRC_DIR)/player_test.c $(INC_DIR)/player_test.h $(INC_DIR)/play
 space_test.o: $(SRC_DIR)/space_test.c $(INC_DIR)/space_test.h $(INC_DIR)/space.h
 	$(CC) $(CFLAGS) $< -o space_test.o
 
+object_test.o: $(SRC_DIR)/object_test.c $(INC_DIR)/object_test.h $(INC_DIR)/object.h
+	$(CC) $(CFLAGS) $< -o object_test.o
+
 clean: 
 	rm -R *.o Minas_de_Rococo *_test html latex Doxyfile doxygen_sqlite3.db
+
+clear:
+	rm -f *.o
 
 dist: 
 	tar -cf JaimeElso-SergioGarcia-AlfredoDeFrutos-Pil.tar *.h *.c Makefile spaces.dat objects.dat links.dat

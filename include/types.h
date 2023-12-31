@@ -108,4 +108,4 @@ typedef enum{
 #define LOSE_COPA -1
 #define MONEY_BILL 300
 
-#endif 
+#endif

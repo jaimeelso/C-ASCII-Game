@@ -290,7 +290,7 @@ Id space_get_link_down(Space* space) {
 
 Set* space_get_object(Space* space) {
     if (!space) {
-        return FALSE;
+        return NULL;
     }
 
     return space->object;
