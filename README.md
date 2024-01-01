@@ -1,6 +1,6 @@
 # C ASCII Game
 
-![Language](https://img.shields.io/badge/Language-C-red?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-4.0-blue?style=for-the-badge) ![License](https://img.shields.io/github/license/jaimeelso/C-ASCII-Game?style=for-the-badge)
+![Language](https://img.shields.io/badge/Language-C-red?style=for-the-badge) ![Version](https://img.shields.io/badge/Version-4.1-blue?style=for-the-badge) ![License](https://img.shields.io/github/license/jaimeelso/C-ASCII-Game?style=for-the-badge)
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/jaimeelso/C-ASCII-Game/master/logo.png">
