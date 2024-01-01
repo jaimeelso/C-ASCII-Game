@@ -41,8 +41,7 @@ int main(int argc, char** argv) {
 	  exit(EXIT_SUCCESS);
         }
     }
-
-
+	
     if (todas || test == 1) test1_space_create();
     if (todas || test == 2) test2_space_create();
     if (todas || test == 3) test1_space_set_name();
@@ -114,7 +113,7 @@ int main(int argc, char** argv) {
 
     PRINT_PASSED_PERCENTAGE;
 
-    return 1;
+    return 0;
 }
 
 void test1_space_create() {

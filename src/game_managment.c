@@ -10,6 +10,7 @@
 *   05 / 03 / 2016 Version 2.0 se añade game_managment_load_objects que se 
 *   encarga de cargar objetos al juego, y se modifica load_spaces para 
 *   que tambien carge la descripcion ASCII de cada casilla
+*   31 / 12 / 2023 Version 2.1 se simplifica el código de load_spaces
 * 
 * @date 02-02-2016
 */
@@ -23,71 +24,70 @@
 #include "../include/game_managment.h"
 
 STATUS game_managment_load_spaces(Game* game, char* filename) {
-	FILE* file = NULL;  /* Puntero para el archivo de texto */
-
-	char line[WORD_SIZE] = "";  /* Cadena de caracteres */
-	char name[WORD_SIZE] = "";  /* Cadena de caracteres */
-	char paints[PRINT_LINES][DESC_SIZE]; /* Array de strings que contienen lineas del arte de ASCII */
-	int i; /* Variable para el bucle for */
-	char description[DESCRIPTION_SIZE] = ""; /* Cadena de caracteres */
-	char large_description[LARGE_DESCRIPTION_SIZE] = ""; /* Cadena de caracteres */
+	FILE* file = NULL;												/* Puntero para el archivo de texto */
+	char line[WORD_SIZE] = "";										/* Cadena de caracteres */
+	char name[WORD_SIZE] = "";										/* Cadena de caracteres */
+	char paints[PRINT_LINES][DESC_SIZE];							/* Array de strings que contienen lineas del arte de ASCII */
+	int i; 															/* Variable para el bucle for */
+	char description[DESCRIPTION_SIZE] = "";						/* Cadena de caracteres */
+	char large_description[LARGE_DESCRIPTION_SIZE] = "";			/* Cadena de caracteres */
 	BOOL illuminated = TRUE;
-	char* toks = NULL;  /* Puntero a char */
-
-	Id id = NO_ID, north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID, up = NO_ID, down = NO_ID;  /* Almacenamiento de diferentes ID */
-
-	Space* space = NULL;  /* Puntero a la estructura Space */
-
-	STATUS status = OK; /* variable a devolver por la función para ver si a salido todo bien */
+	char *toks = NULL;  											/* Puntero a char */
+	Id id = NO_ID;													/* Almacenamiento de ID */
+	Id north = NO_ID, east = NO_ID, south = NO_ID, west = NO_ID;
+	Id up = NO_ID, down = NO_ID;
+	Space* space = NULL;											/* Puntero a la estructura Space */
+	STATUS status = OK; 											/* variable a devolver por la función para ver si a salido todo bien */
   
-	if (!filename) {
-		return ERROR;
-	}
+	if (!filename) return ERROR;
   
 	file = fopen(filename, "r");
-	if (file == NULL) {
-		return ERROR;
-	}
+	if (!file) return ERROR;
   
 	while (fgets(line, WORD_SIZE, file)) {
 		if (strncmp("#s:", line, 3) == 0) {
 			toks = strtok(line + 3, SPACES_DELIMITER);
-			id = atol(toks);
+			if (toks) id = atol(toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			if(toks){
-				strcpy(name, toks);
-			}
+			if(toks) strcpy(name, toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			north = atol(toks);
+			if (toks) north = atol(toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			east = atol(toks);
+			if (toks) east = atol(toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			south = atol(toks);
+			if (toks) south = atol(toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			west = atol(toks);
+			if (toks) west = atol(toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			up = atol(toks);
+			if (toks) up = atol(toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			down = atol(toks);
+			if (toks) down = atol(toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			illuminated = atoi(toks);
+			if (toks) illuminated = atoi(toks);
+
 			for (i = 0; i < PRINT_LINES; i++) {
 				toks = strtok(NULL, SPACES_DELIMITER);
-				if(toks){
-					strcpy(paints[i], toks);
-				}
+				if(toks) strcpy(paints[i], toks);
 			}
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			if(toks){
-				strcpy(description, toks);
-			}
+			if (toks) strcpy(description, toks);
+
 			toks = strtok(NULL, SPACES_DELIMITER);
-			if(toks){
-				strcpy(large_description, toks);
-			}
-#ifdef DEBUG 
+			if(toks) strcpy(large_description, toks);
+
+			#ifdef DEBUG 
 			printf("Leido: %ld|%s|%ld|%ld|%ld|%ld|%ld|%ld|%d|%s|%s|%s|%s|%s\n", id, name, north, east, south, west, up, down, illuminated, paints[0], paints[1], paints[2], description, large_description);
-#endif
+			#endif
+
 			space = space_create(id);
 			if (space != NULL) {
 				space_set_name(space, name);
@@ -98,20 +98,15 @@ STATUS game_managment_load_spaces(Game* game, char* filename) {
 				space_set_link_up(space, up);
 				space_set_link_down(space, down);
 				space_set_illuminated(space, illuminated);
-				for (i = 0; i < PRINT_LINES; i++) {
-					space_set_gdesc(space, i, paints[i]);
-				}
+				for (i = 0; i < PRINT_LINES; i++) space_set_gdesc(space, i, paints[i]);
 				space_set_description(space, description);
 				space_set_large_description(space, large_description);
-			
 				game_add_space(game, space);
 			}
 		}
 	}
   
-	if (ferror(file)) {
-		status = ERROR;
-	}
+	if (ferror(file)) status = ERROR;
 	
 	fclose(file);
 	
@@ -119,306 +114,276 @@ STATUS game_managment_load_spaces(Game* game, char* filename) {
 }
 
 STATUS game_managment_load_objects(Game* game, char* filename){
-  FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	FILE* file = NULL;  /* Puntero para el archivo de texto */
+	char line[WORD_SIZE] = "";  /* Cadena de caracteres */
+	char name[WORD_SIZE] = "";  /* Cadena de caracteres */
+	char description[DESCRIPTION_SIZE] = ""; /* Cadena de caracteres */
+	char alt_description[DESCRIPTION_SIZE] = ""; /* Cadena de caracteres */
+	BOOL movable = TRUE, move = TRUE, visible = TRUE, illuminated = TRUE, on = TRUE;
+	Id link = NO_ID;
+	int n_objects;
+	char* toks = NULL;  /* Puntero a char*/
+	Id id = NO_ID, location = NO_ID;  /* Almacenamiento de ID*/
+	Object* object = NULL;  /* Puntero a la estructura Object*/
+	STATUS status = OK; /* Variable a devolver por la función para ver si a salido todo bien*/
 
-  char line[WORD_SIZE] = "";  /*Cadena de caracteres*/
-  char name[WORD_SIZE] = "";  /*Cadena de caracteres*/
-  char description[DESCRIPTION_SIZE] = ""; /*Cadena de caracteres*/
-  char alt_description[DESCRIPTION_SIZE] = ""; /*Cadena de caracteres*/
-  BOOL movable = TRUE, move = TRUE, visible = TRUE, illuminated = TRUE, on = TRUE;
-  Id link = NO_ID;
-  int n_objects;
-  char* toks = NULL;  /*Puntero a char*/
+	if (!filename) return ERROR;
 
-  Id id = NO_ID, location = NO_ID;  /*Almacenamiento de ID*/
+	file = fopen(filename, "r");
+	if (!file) return ERROR;
 
-  Object* object = NULL;  /*Puntero a la estructura Object*/
+	while (fgets(line, WORD_SIZE, file)) {
+		if (strncmp("#o:", line, 3) == 0) {
+			toks = strtok(line + 3, DELIMITER);
+			if (toks) id = atol(toks);
 
-  STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
-  
-  if (!filename) {
-    return ERROR;
-  }
-  
-  file = fopen(filename, "r");
-  if (file == NULL) {
-    return ERROR;
-  }
-  
-  while (fgets(line, WORD_SIZE, file)) {
-    if (strncmp("#o:", line, 3) == 0) {
-      toks = strtok(line + 3, DELIMITER);
-      id = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-        strcpy(name, toks);
-      }
-      toks = strtok(NULL, DELIMITER);
-      location = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      movable = atoi(toks);
-      toks = strtok(NULL, DELIMITER);
-      move = atoi(toks);
-      toks = strtok(NULL, DELIMITER);
-      visible = atoi(toks);
-      toks = strtok(NULL, DELIMITER);
-      illuminated = atoi(toks);
-      toks = strtok(NULL, DELIMITER);
-      on = atoi(toks);
-      toks = strtok(NULL, DELIMITER);
-      link = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      n_objects = atoi(toks);
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-       strcpy(description, toks);
-      }
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-        strcpy(alt_description, toks);
-      }
-#ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld\n", id, name, location);
-#endif
-      object = object_create(id);
-      if (object != NULL) {
-        object_set_name(object, name);
-        game_set_object_location(game, location, id);
-        object_set_movable(object, movable);
-        object_set_move(object, move);
-        object_set_visible(object, visible);
-        object_set_illuminate(object, illuminated);
-        object_set_on(object, on);
-        object_set_link(object, link);
-        object_set_n_objects(object, n_objects);
-        object_set_description(object, description);
-        object_set_alt_descrip(object, alt_description);
-        game_add_object(game, object);
-      }
-    }
-  }
-  
-  if (ferror(file)) {
-    status = ERROR;
-  }
-  
-  fclose(file);
-  
-  return status;
+			toks = strtok(NULL, DELIMITER);
+			if (toks) strcpy(name, toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) location = atol(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) movable = atoi(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) move = atoi(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) visible = atoi(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) illuminated = atoi(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) on = atoi(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) link = atol(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) n_objects = atoi(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) strcpy(description, toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) strcpy(alt_description, toks);
+
+			#ifdef DEBUG 
+			printf("Leido: %ld|%s|%ld\n", id, name, location);
+			#endif
+
+			object = object_create(id);
+			if (object != NULL) {
+				object_set_name(object, name);
+				game_set_object_location(game, location, id);
+				object_set_movable(object, movable);
+				object_set_move(object, move);
+				object_set_visible(object, visible);
+				object_set_illuminate(object, illuminated);
+				object_set_on(object, on);
+				object_set_link(object, link);
+				object_set_n_objects(object, n_objects);
+				object_set_description(object, description);
+				object_set_alt_descrip(object, alt_description);
+				game_add_object(game, object);
+			}
+		}
+	}
+
+	if (ferror(file)) status = ERROR;
+	fclose(file);
+
+	return status;
 }
 
 STATUS game_managment_load_links(Game* game, char* filename) {
-  FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	char line[WORD_SIZE] = "";  /*Cadena de caracteres*/
+	char name[WORD_SIZE] = "";  /*Cadena de caracteres*/
+	char clue[WORD_SIZE] = "";
+	char* toks = NULL;  /*Puntero a char*/
+	Id id = NO_ID, linkA = NO_ID, linkB = NO_ID;  /*Almacenamiento de diferentes ID*/
+	int access;
+	Link* link = NULL;  /*Puntero a la estructura Link*/
+	STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
 
-  char line[WORD_SIZE] = "";  /*Cadena de caracteres*/
-  char name[WORD_SIZE] = "";  /*Cadena de caracteres*/
-  char clue[WORD_SIZE] = "";
+	if (!filename) return ERROR;
 
-  char* toks = NULL;  /*Puntero a char*/
+	file = fopen(filename, "r");
+	if (file == NULL) return ERROR;
 
-  Id id = NO_ID, linkA = NO_ID, linkB = NO_ID;  /*Almacenamiento de diferentes ID*/
+	while (fgets(line, WORD_SIZE, file)) {
+		if (strncmp("#l:", line, 3) == 0) {
+			toks = strtok(line + 3, DELIMITER);
+			if (toks) id = atol(toks);
 
-  int access;
+			toks = strtok(NULL, DELIMITER);
+			if(toks) strcpy(name, toks);
 
-  Link* link = NULL;  /*Puntero a la estructura Link*/
+			toks = strtok(NULL, DELIMITER);
+			if (toks) linkA = atol(toks);
 
-  STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
-  
-  if (!filename) {
-    return ERROR;
-  }
-  
-  file = fopen(filename, "r");
-  if (file == NULL) {
-    return ERROR;
-  }
-  
-  while (fgets(line, WORD_SIZE, file)) {
-    if (strncmp("#l:", line, 3) == 0) {
-      toks = strtok(line + 3, DELIMITER);
-      id = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-        strcpy(name, toks);
-      }
-      toks = strtok(NULL, DELIMITER);
-      linkA = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      linkB = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      access = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-        strcpy(clue, toks);
-      }
-#ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%d|%ld\n", id, name, linkA, linkB, access);
-#endif
-      link = link_create(id);
-      if (link != NULL) {
-        link_set_name(link, name);
-        link_set_linkA(link, linkA);
-        link_set_linkB(link, linkB);
-        link_set_access(link, access);
-        link_set_clue(link, clue);
+			toks = strtok(NULL, DELIMITER);
+			if (toks) linkB = atol(toks);
 
-        game_add_link(game, link);
+			toks = strtok(NULL, DELIMITER);
+			if (toks) access = atol(toks);
 
-      }
-    }
-  }
-  
-  if (ferror(file)) {
-    status = ERROR;
-  }
-  
-  fclose(file);
-  
-  return status;
+			toks = strtok(NULL, DELIMITER);
+			if(toks) strcpy(clue, toks);
+
+			#ifdef DEBUG 
+			printf("Leido: %ld|%s|%ld|%ld|%d|%ld\n", id, name, linkA, linkB, access);
+			#endif
+
+			link = link_create(id);
+			if (link != NULL) {
+				link_set_name(link, name);
+				link_set_linkA(link, linkA);
+				link_set_linkB(link, linkB);
+				link_set_access(link, access);
+				link_set_clue(link, clue);
+
+				game_add_link(game, link);
+			}
+		}
+	}
+
+	if (ferror(file)) status = ERROR;
+	fclose(file);
+
+	return status;
 }
 
 STATUS game_managment_load_characters(Game* game, char* filename) {
-  FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	char line[WORD_SIZE] = "";               /*Cadena de caracteres*/
+	char name[WORD_SIZE] = "";               /*Cadena de caracteres*/
+	char description[DESCRIPTION_SIZE] = ""; /*Cadena de caracteres*/
+	char* toks = NULL;  /*Puntero a char*/
+	Id id = NO_ID, location = NO_ID, object = NO_ID;  /*Almacenamiento de diferentes ID*/
+	BOOL talk;  /*Booleno para saber si puede hablar el personaje o no*/
+	Character* character = NULL;  /*Puntero a la estructura Link*/
+	STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
 
-  char line[WORD_SIZE] = "";               /*Cadena de caracteres*/
-  char name[WORD_SIZE] = "";               /*Cadena de caracteres*/
-  char description[DESCRIPTION_SIZE] = ""; /*Cadena de caracteres*/
+	if (!filename) return ERROR;
 
-  char* toks = NULL;  /*Puntero a char*/
+	file = fopen(filename, "r");
+	if (file == NULL) return ERROR;
 
-  Id id = NO_ID, location = NO_ID, object = NO_ID;  /*Almacenamiento de diferentes ID*/
+	while (fgets(line, WORD_SIZE, file)) {
+	if (strncmp("#c:", line, 3) == 0) {
+		toks = strtok(line + 3, DELIMITER);
+		if (toks) id = atol(toks);
 
-  BOOL talk;  /*Booleno para saber si puede hablar el personaje o no*/
+		toks = strtok(NULL, DELIMITER);
+		if(toks) strcpy(name, toks);
 
-  Character* character = NULL;  /*Puntero a la estructura Link*/
+		toks = strtok(NULL, DELIMITER);
+		if (toks) location = atol(toks);
 
-  STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
-  
-  if (!filename) {
-    return ERROR;
-  }
-  
-  file = fopen(filename, "r");
-  if (file == NULL) {
-    return ERROR;
-  }
-  
-  while (fgets(line, WORD_SIZE, file)) {
-    if (strncmp("#c:", line, 3) == 0) {
-      toks = strtok(line + 3, DELIMITER);
-      id = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-        strcpy(name, toks);
-      }
-      toks = strtok(NULL, DELIMITER);
-      location = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      object = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      talk = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-      strcpy(description, toks);
-    }
-#ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%d|%ld|%s\n", id, name, location, object, talk, description);
-#endif
-      character = character_create(id);
-      if (character != NULL) {
-        character_set_name(character, name);
-        character_set_description(character, description);
-        character_set_location(character, location);
-        character_set_object(character, object);
-        character_set_talk(character, talk);
+		toks = strtok(NULL, DELIMITER);
+		if (toks) object = atol(toks);
 
-        game_add_character(game, character);
+		toks = strtok(NULL, DELIMITER);
+		if (toks) talk = atol(toks);
 
-      }
-    }
-  }
-  
-  if (ferror(file)) {
-    status = ERROR;
-  }
-  
-  fclose(file);
-  
-  return status;
+		toks = strtok(NULL, DELIMITER);
+		if(toks) strcpy(description, toks);
+
+		#ifdef DEBUG 
+		printf("Leido: %ld|%s|%ld|%ld|%d|%ld|%s\n", id, name, location, object, talk, description);
+		#endif
+
+		character = character_create(id);
+		if (character != NULL) {
+			character_set_name(character, name);
+			character_set_description(character, description);
+			character_set_location(character, location);
+			character_set_object(character, object);
+			character_set_talk(character, talk);
+
+			game_add_character(game, character);
+		}
+	}
+	}
+
+	if (ferror(file)) status = ERROR;
+	fclose(file);
+
+	return status;
 }
 
 STATUS game_managment_load_players(Game* game, char* filename) {
-  FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	FILE* file = NULL;  /*Puntero para el archivo de texto*/
+	char line[WORD_SIZE] = "";               /*Cadena de caracteres*/
+	char name[WORD_SIZE] = "";               /*Cadena de caracteres*/
+	char* toks = NULL;  /*Puntero a char*/
+	Id id = NO_ID, location = NO_ID;  /*Almacenamiento de diferentes ID*/
+	Id object1 = NO_ID, object2 = NO_ID, object3 = NO_ID, object4 = NO_ID, object5 = NO_ID, object6 = NO_ID; /*Almacenamiento de diferentes ID*/
+	Player* player = NULL;  /*Puntero a la estructura Link*/
+	STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
 
-  char line[WORD_SIZE] = "";               /*Cadena de caracteres*/
-  char name[WORD_SIZE] = "";               /*Cadena de caracteres*/
+	if (!filename) return ERROR;
 
-  char* toks = NULL;  /*Puntero a char*/
+	file = fopen(filename, "r");
+	if (file == NULL) return ERROR;
 
-  Id id = NO_ID, location = NO_ID;  /*Almacenamiento de diferentes ID*/
-  Id object1 = NO_ID, object2 = NO_ID, object3 = NO_ID, object4 = NO_ID, object5 = NO_ID, object6 = NO_ID; /*Almacenamiento de diferentes ID*/
+	while (fgets(line, WORD_SIZE, file)) {
+		if (strncmp("#p:", line, 3) == 0) {
+			toks = strtok(line + 3, DELIMITER);
+			if (toks) id = atol(toks);
+			
+			toks = strtok(NULL, DELIMITER);
+			if(toks) strcpy(name, toks);
 
-  Player* player = NULL;  /*Puntero a la estructura Link*/
+			toks = strtok(NULL, DELIMITER);
+			if (toks) location = atol(toks);
 
-  STATUS status = OK; /*variable a devolver por la función para ver si a salido todo bien*/
-  
-  if (!filename) {
-    return ERROR;
-  }
-  
-  file = fopen(filename, "r");
-  if (file == NULL) {
-    return ERROR;
-  }
-  
-  while (fgets(line, WORD_SIZE, file)) {
-    if (strncmp("#p:", line, 3) == 0) {
-      toks = strtok(line + 3, DELIMITER);
-      id = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      if(toks){
-       strcpy(name, toks);
-      }
-      toks = strtok(NULL, DELIMITER);
-      location = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      object1 = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      object2 = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      object3 = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      object4 = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      object5 = atol(toks);
-      toks = strtok(NULL, DELIMITER);
-      object6 = atol(toks);
-#ifdef DEBUG 
-      printf("Leido: %ld|%s|%ld|%ld|%d|%ld|%ld|%ld|%ld\n", id, name, location, object1, object2, object3, object4, object5, object6);
-#endif
-      player = player_create(id);
-      if (player != NULL) {
-        player_set_name(player, name);
-        player_set_location(player, location);
-        player_set_inventory(player, object1);
-        player_set_inventory(player, object2);
-        player_set_inventory(player, object3);
-        player_set_inventory(player, object4);
-        player_set_inventory(player, object5);
-        player_set_inventory(player, object6);
+			toks = strtok(NULL, DELIMITER);
+			if (toks) object1 = atol(toks);
 
-        game_add_player(game, player);
-      }
-    }
-  }
-  
-  if (ferror(file)) {
-    status = ERROR;
-  }
-  
-  fclose(file);
-  
-  return status;
+			toks = strtok(NULL, DELIMITER);
+			if (toks) object2 = atol(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) object3 = atol(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) object4 = atol(toks);
+
+			toks = strtok(NULL, DELIMITER);
+			if (toks) object5 = atol(toks);
+			
+			toks = strtok(NULL, DELIMITER);
+			if (toks) object6 = atol(toks);
+
+			#ifdef DEBUG 
+			printf("Leido: %ld|%s|%ld|%ld|%d|%ld|%ld|%ld|%ld\n", id, name, location, object1, object2, object3, object4, object5, object6);
+			#endif
+
+			player = player_create(id);
+			if (player != NULL) {
+				player_set_name(player, name);
+				player_set_location(player, location);
+				player_set_inventory(player, object1);
+				player_set_inventory(player, object2);
+				player_set_inventory(player, object3);
+				player_set_inventory(player, object4);
+				player_set_inventory(player, object5);
+				player_set_inventory(player, object6);
+
+				game_add_player(game, player);
+			}
+		}
+	}
+
+	if (ferror(file)) status = ERROR;
+	fclose(file);
+
+	return status;
 }
 
 STATUS game_managment_save(Game* game, char* save){
@@ -578,35 +543,35 @@ STATUS game_managment_save(Game* game, char* save){
 }
 
 STATUS game_managment_load(Game* game, char save[]){
-  char save_aux1[WORD_SIZE] = "";
-  char save_aux2[WORD_SIZE] = "";
-  char save_aux3[WORD_SIZE] = "";
-  char save_aux4[WORD_SIZE] = "";
-  char save_aux5[WORD_SIZE] = "";
+	char save_aux1[WORD_SIZE] = "";
+	char save_aux2[WORD_SIZE] = "";
+	char save_aux3[WORD_SIZE] = "";
+	char save_aux4[WORD_SIZE] = "";
+	char save_aux5[WORD_SIZE] = "";
 
-  strcpy(save_aux1, save);
+	strcpy(save_aux1, save);
 
-  strcat(save_aux1, "/spaces.dat");
+	strcat(save_aux1, "/spaces.dat");
 
-  strcpy(save_aux2, save);
+	strcpy(save_aux2, save);
 
-  strcat(save_aux2, "/objects.dat");
+	strcat(save_aux2, "/objects.dat");
 
-  strcpy(save_aux3, save);
+	strcpy(save_aux3, save);
 
-  strcat(save_aux3, "/links.dat");
+	strcat(save_aux3, "/links.dat");
 
-  strcpy(save_aux4, save);
+	strcpy(save_aux4, save);
 
-  strcat(save_aux4, "/characters.dat");
+	strcat(save_aux4, "/characters.dat");
 
-  strcpy(save_aux5, save);
+	strcpy(save_aux5, save);
 
-  strcat(save_aux5, "/players.dat");
+	strcat(save_aux5, "/players.dat");
 
-  if(game_init_from_file(game, save_aux1, save_aux2, save_aux3, save_aux4, save_aux5) == ERROR){
-    return ERROR;
-  }
+	if (game_init_from_file(game, save_aux1, save_aux2, save_aux3, save_aux4, save_aux5) == ERROR) {
+		return ERROR;
+	}
 
-  return OK;
+	return OK;
 }

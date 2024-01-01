@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
 
     PRINT_PASSED_PERCENTAGE;
 
-    return 1;
+    return 0;
 }
 
 void test1_dialogue_create() {
